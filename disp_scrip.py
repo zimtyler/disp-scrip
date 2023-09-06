@@ -167,9 +167,9 @@ def responseCount_to_csv(directory):
             "ResponseTypeBeforeReply",
             "CustomerReplyDate",
             "CustomerReplyType",
-            "Store Email",
-            "Store Phone",
-            "Store Text"
+            "Store Method A",
+            "Store Method B",
+            "Store Method C"
         ])
         
         # Actualize the dataframe
