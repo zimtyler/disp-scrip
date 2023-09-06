@@ -4,8 +4,8 @@ import polars as pl
 from datetime import datetime, timedelta
 
 """
-Including Activity IDs (Process States) that 'should' have prior Customer communication, like Offer to Purchase or Vehicle Delivery,
-allows us to reasonably assume a customer reply did occur, it just wasn't captured.
+Including Activity IDs (Process States) that 'should' have prior Customer communication, like 17 or 26,
+allows us to reasonably assume a customer reply did occur, it just wasn't captured via 5, 7, or 8.
 
 """
 # Redacted
