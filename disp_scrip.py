@@ -37,12 +37,12 @@ IdDict = {
 
 def responseCount_to_csv(directory):
     csv_files = glob.glob(os.path.join(directory, "*.csv"))
-    for filename in csv_files:
+    for file in csv_files:
 
         tic = timeit.default_timer()
-        suffix = filename[:-4][-8:] # Grab them dates off source file
+        suffix = file[:-4][-8:] # Grab them dates off source file
         
-        lf = pl.scan_csv(filename, has_header=True)
+        lf = pl.scan_csv(file, has_header=True)
         lf = lf.select(["ActivityTypeId", "ActivityDate", "Origin"])
         
         # Filter to only ActivityTypesIds we're interested in
@@ -80,7 +80,7 @@ def responseCount_to_csv(directory):
             pl.count("CustContactMethodIfB4Store").alias("#CustContactB4Store"),
             pl.first("CustContactMethodIfB4Store")
         ])
-        lf_CustFirst = f = lf_CustFirst.with_columns(pl.col("CustContactB4StoreDate").str.strptime(pl.datatypes.Date, "%Y-%m-%dT%H:%M:%S%.f%z", strict=False))
+        lf_CustFirst = lf_CustFirst.with_columns(pl.col("CustContactB4StoreDate").str.strptime(pl.datatypes.Date, "%Y-%m-%dT%H:%M:%S%.f%z", strict=False))
 
         """
         Filter lf to only Leads with Store Response prior to any Customer Reply (removes Customer contact first)
