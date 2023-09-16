@@ -36,7 +36,7 @@ IdDict = {
 }
 
 def responseCount_to_csv(directory):
-    csv_files = glob.glob(os.path.join(directory, '*.csv'))
+    csv_files = glob.glob(os.path.join(directory, "*.csv"))
     for filename in csv_files:
 
         tic = timeit.default_timer()
@@ -138,7 +138,8 @@ def responseCount_to_csv(directory):
         yesterday = datetime.now() - timedelta(1)
         lf = lf.filter(pl.col("FirstResponseDate") < pl.lit(yesterday.date()))
         lf.drop("ActivityDate")
-        
+
+        # TODO: Below not idea for runtime. Fix.
         for v in IdDict.values():
             for subk, subv in v.items():
                 lf = lf.with_columns(pl.when(pl.col("ActivityTypeId") == subk).then(1).otherwise(0).alias(subv))
@@ -178,7 +179,7 @@ def responseCount_to_csv(directory):
         df.write_csv(f"response_counts_{suffix}.csv")
         toc = timeit.default_timer()
         time = toc - tic
-        print(f'Run Time: {time}s\n\n')
+        print(f"Run Time: {time}s\n\n")
     
 def main():
     dir_path = input("Provide path to directory containing csvs: ")
